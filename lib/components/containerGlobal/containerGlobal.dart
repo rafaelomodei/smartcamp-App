@@ -1,0 +1,20 @@
+import 'package:flutter/material.dart';
+
+class ContainerGLobal extends StatefulWidget {
+  final Widget child;
+
+  ContainerGLobal(this.child, {Key? key}) : super(key: key);
+
+  @override
+  _ContainerGLobalState createState() => _ContainerGLobalState();
+}
+
+class _ContainerGLobalState extends State<ContainerGLobal> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(32.0),
+      child: widget.child,
+    );
+  }
+}
