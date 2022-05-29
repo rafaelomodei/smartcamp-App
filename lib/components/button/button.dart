@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class Button extends StatelessWidget {
   String label = '';
-  Color color = const Color.fromRGBO(240, 240, 240, 1.0);
+  // Color color = const Color.fromRGBO(240, 240, 240, 1.0);
 
-  Button(this.label, {this.color = Colors.red, Key? key}) : super(key: key);
+  Button(this.label, {Key? key}) : super(key: key);
 
   Widget build(BuildContext context) {
     return Container(

@@ -5,8 +5,10 @@ ElevatedButtonThemeData elevatedButtonTheme() {
   return ElevatedButtonThemeData(
     style: ButtonStyle(
       elevation: MaterialStateProperty.all(0.0),
-      backgroundColor: MaterialStateProperty.all(
-        colorGreenPrimary,
+      shape: MaterialStateProperty.all(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16.0),
+        ),
       ),
     ),
   );

@@ -81,6 +81,5 @@ flutter:
   fonts:
     - family: Jost
       fonts:
-        - asset: assets/fonts/Jost-Italic-VariableFont_wght.ttf
         - asset: assets/fonts/Jost-VariableFont_wght.ttf
           style: italic

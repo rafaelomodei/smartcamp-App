@@ -41,17 +41,21 @@ class Login extends StatelessWidget {
                       hintText: 'Número de telefone',
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 8, 0, 16),
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: TextButton(
-                        onPressed: () {},
-                        child: const Text('cadastrar-se'),
-                      ),
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.fromLTRB(0, 8, 0, 16),
+                  //   child: Align(
+                  //     alignment: Alignment.centerRight,
+                  //     child: TextButton(
+                  //       onPressed: () {},
+                  //       child: const Text('cadastrar-se'),
+                  //     ),
+                  //   ),
+                  // ),
                   Button('Entrar'),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: Text('Segundo botão aaa'),
+                  ),
                 ],
               ),
             ),

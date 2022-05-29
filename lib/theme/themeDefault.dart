@@ -17,17 +17,23 @@ const ColorScheme _shrineColorScheme = ColorScheme(
   error: colorError,
   onError: Colors.white,
 
-  surface: Colors.white, // AppBar
-  onSurface: colorGreenPrimary, //icons, inputs
+  surface: colorTextBody, // AppBar
+  onSurface: colorOnTextBody, //icons, inputs
 
   brightness: Brightness.light,
 );
 
 ThemeData themeDefault() {
   return ThemeData(
-    fontFamily: 'Jost',
-    colorScheme: _shrineColorScheme,
-    inputDecorationTheme: inputDecorationTheme(),
+    useMaterial3: true,
+    colorSchemeSeed: Color.fromARGB(255, 54, 244, 12),
+    brightness: Brightness.light,
+    // fontFamily: 'Jost',
+    // colorScheme: _shrineColorScheme,
+    // primaryColor: colorGreenPrimary,
+    // backgroundColor: colorBackground,
+    // inputDecorationTheme: inputDecorationTheme(),
+    // elevatedButtonTheme: elevatedButtonTheme(),
     textTheme: textDefault,
   );
 }

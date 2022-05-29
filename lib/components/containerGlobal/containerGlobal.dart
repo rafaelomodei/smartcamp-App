@@ -14,7 +14,11 @@ class _ContainerGLobalState extends State<ContainerGLobal> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(32.0),
-      child: widget.child,
+      child: Center(
+        heightFactor: double.infinity,
+        child: Container(
+            width: 500.0, height: double.infinity, child: widget.child),
+      ),
     );
   }
 }
