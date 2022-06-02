@@ -3,7 +3,14 @@ import 'package:smart_camp/components/button/button.dart';
 import 'package:smart_camp/components/cardSelectPlant/cardSelectPlant.dart';
 import 'package:smart_camp/components/containerGlobal/containerGlobal.dart';
 
-class SelectPlant extends StatelessWidget {
+class SelectPlant extends StatefulWidget {
+  SelectPlant({Key? key}) : super(key: key);
+
+  @override
+  _SelectPlantState createState() => _SelectPlantState();
+}
+
+class _SelectPlantState extends State<SelectPlant> {
   final inputNameCampController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
@@ -27,71 +34,77 @@ class SelectPlant extends StatelessWidget {
         // backgroundColor: Colors.transparent,
       ),
       body: ContainerGLobal(
-        Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        ListView(
           children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Center(
-                  child: Container(
-                    width: 500.0,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 40),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'É hora',
-                                textAlign: TextAlign.left,
-                                style: Theme.of(context).textTheme.headline4,
-                              ),
-                              Text(
-                                'de plantar!',
-                                style: Theme.of(context).textTheme.headline3,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 24),
-                          child: Text(
-                            'Quais plantas você deseja plantar no campo Hortaliças?',
+            Center(
+              child: Container(
+                width: 500.0,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 40),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'É hora',
                             textAlign: TextAlign.left,
-                            style: Theme.of(context).textTheme.bodyText1,
+                            style: Theme.of(context).textTheme.headline4,
                           ),
-                        ),
-                        GridView.count(
-                          shrinkWrap: true,
-                          crossAxisCount: isMobile ? 2 : 3,
-                          crossAxisSpacing: 12.0,
-                          mainAxisSpacing: 12.0,
-                          children: List.generate(20, (index) {
-                            return CardSlectPlant();
-                          }),
+                          Text(
+                            'de plantar!',
+                            style: Theme.of(context).textTheme.headline3,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 24),
+                      child: Text(
+                        'Quais plantas você deseja plantar no campo Hortaliças?',
+                        textAlign: TextAlign.left,
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
+                    ),
+                    ListView(
+                      // shrinkWrap: true,
+                      children: <Widget>[
+                        Expanded(
+                          child: GridView.count(
+                            shrinkWrap: true,
+                            crossAxisCount: isMobile ? 2 : 3,
+                            crossAxisSpacing: 12.0,
+                            mainAxisSpacing: 12.0,
+                            scrollDirection: Axis.vertical,
+                            children: List.generate(20, (index) {
+                              return Column(
+                                children: [
+                                  Expanded(child: CardSlectPlant()),
+                                ],
+                              );
+                            }),
+                          ),
                         ),
                       ],
                     ),
-                  ),
+                  ],
                 ),
               ),
             ),
-            Stack(
-              alignment: Alignment.bottomCenter,
-              children: [
-                Container(
-                  color: Theme.of(context).backgroundColor,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-                    child: Button('Confirmar'),
-                  ),
-                ),
-              ],
-            ),
           ],
         ),
+        // Stack(
+        //   alignment: Alignment.bottomCenter,
+        //   children: [
+        //     Container(
+        //       child: Padding(
+        //         padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+        //         child: Button('Confirmar'),
+        //       ),
+        //     ),
+        //   ],
+        // ),
       ),
     );
   }

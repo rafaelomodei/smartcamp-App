@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:smart_camp/components/button/button.dart';
 import 'package:smart_camp/components/containerGlobal/containerGlobal.dart';
 import 'package:smart_camp/components/input/input.dart';
@@ -17,6 +18,7 @@ class _LoginTokenSatate extends State<LoginToken> {
           child: Container(
             width: 500,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   'Insira o codigo',
@@ -35,10 +37,19 @@ class _LoginTokenSatate extends State<LoginToken> {
                     child: Row(
                       children: List<Widget>.generate(4, (int index) {
                         return Expanded(
-                          child: Input(
-                            '?',
+                          child: TextFormField(
+                            decoration: const InputDecoration(
+                              border: UnderlineInputBorder(),
+                              hintText: '?',
+                              counterText: '',
+                            ),
+                            textAlign: TextAlign.center,
                             maxLength: 1,
-                            regExp: r'[0-9]',
+                            keyboardType: TextInputType.number,
+                            inputFormatters: <TextInputFormatter>[
+                              FilteringTextInputFormatter.allow(
+                                  RegExp(r'[0-9]')),
+                            ],
                           ),
                         );
                       }),

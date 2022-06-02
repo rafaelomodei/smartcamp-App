@@ -11,19 +11,16 @@ class Button extends StatelessWidget {
       width: double.infinity,
       height: 56,
       child: ElevatedButton(
-        style: ButtonStyle(
-          textStyle: MaterialStateProperty.all(
-            const TextStyle(fontSize: 13.0),
+        style: ElevatedButton.styleFrom(
+          textStyle: TextStyle(fontSize: 13.0),
+          padding: const EdgeInsets.all(8.0),
+          elevation: 0.0,
+          primary: Theme.of(context).colorScheme.primary,
+          onPrimary: Theme.of(context).colorScheme.onPrimary,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.0),
           ),
-          padding: MaterialStateProperty.all(const EdgeInsets.all(8.0)),
-          elevation: MaterialStateProperty.all(0.0),
-          // backgroundColor:
-          // MaterialStateProperty.all(Theme.of(context).primaryColor),
-          shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16.0),
-            ),
-          ),
+          shadowColor: Colors.transparent,
         ),
         onPressed: () {},
         child: Text(label),
