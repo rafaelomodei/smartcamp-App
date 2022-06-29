@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_camp/screens/private/createCamp/createCamp.dart';
+import 'package:smart_camp/screens/private/createdCamp/createdCamp.dart';
 import 'package:smart_camp/screens/private/home/home.dart';
 import 'package:smart_camp/screens/private/selectPlant/selectPlant.dart';
 import 'package:smart_camp/screens/public/login/login.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: themeDefault(),
-      home: SelectPlant(),
+      home: Home(),
       debugShowCheckedModeBanner: false,
     );
   }

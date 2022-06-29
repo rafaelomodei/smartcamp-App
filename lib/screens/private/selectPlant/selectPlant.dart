@@ -21,12 +21,23 @@ class _SelectPlantState extends State<SelectPlant> {
     bool isMobile = MediaQuery.of(context).size.shortestSide < 576;
 
     return Scaffold(
+      floatingActionButton: Container(
+        width: 564,
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.background,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(32.0, 16.0, 32.0, 16.0),
+          child: Button('Cadastrar plantio'),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios_new_rounded,
-            color: Theme.of(context).colorScheme.surface,
+            color: Theme.of(context).colorScheme.secondary,
           ),
           onPressed: () {},
         ),
@@ -35,76 +46,59 @@ class _SelectPlantState extends State<SelectPlant> {
       ),
       body: ContainerGLobal(
         ListView(
-          children: [
-            Center(
-              child: Container(
-                width: 500.0,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 40),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'É hora',
-                            textAlign: TextAlign.left,
-                            style: Theme.of(context).textTheme.headline4,
-                          ),
-                          Text(
-                            'de plantar!',
-                            style: Theme.of(context).textTheme.headline3,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 24),
-                      child: Text(
-                        'Quais plantas você deseja plantar no campo Hortaliças?',
+          children: <Widget>[
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 40),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'É hora',
                         textAlign: TextAlign.left,
-                        style: Theme.of(context).textTheme.bodyText1,
+                        style: Theme.of(context).textTheme.headline4,
                       ),
-                    ),
-                    ListView(
-                      // shrinkWrap: true,
-                      children: <Widget>[
-                        Expanded(
-                          child: GridView.count(
-                            shrinkWrap: true,
-                            crossAxisCount: isMobile ? 2 : 3,
-                            crossAxisSpacing: 12.0,
-                            mainAxisSpacing: 12.0,
-                            scrollDirection: Axis.vertical,
-                            children: List.generate(20, (index) {
-                              return Column(
-                                children: [
-                                  Expanded(child: CardSlectPlant()),
-                                ],
-                              );
-                            }),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                      Text(
+                        'de plantar!',
+                        style: Theme.of(context).textTheme.headline3,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 24),
+                  child: Text(
+                    'Quais plantas você deseja plantar no campo Hortaliças?',
+                    textAlign: TextAlign.left,
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                ),
+
+                // shrinkWrap: true,
+              ],
             ),
+            GridView.count(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              crossAxisCount: isMobile ? 2 : 3,
+              crossAxisSpacing: 12.0,
+              mainAxisSpacing: 12.0,
+              children: List.generate(20, (index) {
+                return CardSlectPlant();
+              }),
+            ),
+            // alignment: Alignment.bottomCenter,
+            // Positioned(
+            //   bottom: 15.0,
+            //   child: Padding(
+            //     padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+            //     child: Button('Confirmar'),
+            //   ),
+            // ),
           ],
         ),
-        // Stack(
-        //   alignment: Alignment.bottomCenter,
-        //   children: [
-        //     Container(
-        //       child: Padding(
-        //         padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-        //         child: Button('Confirmar'),
-        //       ),
-        //     ),
-        //   ],
-        // ),
       ),
     );
   }
