@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:smart_camp/components/button/button.dart';
-import 'package:smart_camp/components/containerGlobal/containerGlobal.dart';
 import 'package:flutter/services.dart';
+import 'package:smart_camp/components/atoms/button/button.dart';
+import 'package:smart_camp/components/organism/containerGlobal/containerGlobal.dart';
 
 class Login extends StatelessWidget {
   final inputPhoneController = TextEditingController();

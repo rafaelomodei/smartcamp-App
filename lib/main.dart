@@ -1,19 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:smart_camp/screens/private/createCamp/createCamp.dart';
-import 'package:smart_camp/screens/private/createdCamp/createdCamp.dart';
+import 'package:provider/provider.dart';
+import 'package:smart_camp/model/listPlants.dart';
+import 'package:smart_camp/model/plant.dart';
 import 'package:smart_camp/screens/private/home/home.dart';
-import 'package:smart_camp/screens/private/selectPlant/selectPlant.dart';
-import 'package:smart_camp/screens/public/login/login.dart';
-import 'package:smart_camp/screens/public/loginToken/loginToken.dart';
-import 'package:smart_camp/screens/public/splashScreen/splashScreen.dart';
 import 'package:smart_camp/theme/themeDefault.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (context) => Plant('Milho'),
+      ),
+      ChangeNotifierProvider(
+        create: (context) => ListPlant(),
+      )
+    ],
+    child: SmartCamp(),
+  ));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class SmartCamp extends StatelessWidget {
+  const SmartCamp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override

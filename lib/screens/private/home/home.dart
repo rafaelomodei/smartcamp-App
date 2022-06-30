@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:smart_camp/components/Text/Text.dart';
-import 'package:smart_camp/components/button/button.dart';
-import 'package:smart_camp/components/card/card.dart';
+import 'package:provider/provider.dart';
+import 'package:smart_camp/components/molecules/card/card.dart';
+import 'package:smart_camp/components/organism/listPlants/listPlants.dart';
+import 'package:smart_camp/model/listPlants.dart';
+import 'package:smart_camp/model/plant.dart';
+import 'package:smart_camp/screens/private/createCamp/createCamp.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -12,38 +14,32 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final List<Widget> ItemList = [
-    TextTitle('Campo 1'),
-    CardItem(),
-    CardItem(),
-    CardItem(),
-    CardItem(),
-    CardItem(),
-    CardItem(),
-    CardItem(),
-    CardItem(),
-    CardItem(),
-    CardItem(),
-    CardItem(),
-    CardItem(),
-    CardItem(),
-    ElevatedButton(onPressed: () {}, child: Text('asdas')),
+  final List<Plant> itemList = [
+    Plant('Manga'),
+    Plant('Morango'),
+    Plant('Alface'),
+    Plant('Mandioca'),
+    // ElevatedButton(onPressed: () {}, child: Text('asdas')),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.background,
-        ),
-        // child: Padding(
-        // padding: const EdgeInsets.fromLTRB(32.0, 16.0, 32.0, 16.0),
-        child: Button('Adicionar novo plantio'),
-        // ),
-      ),
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.background,
+          ),
+          // child: Padding(
+          // padding: const EdgeInsets.fromLTRB(32.0, 16.0, 32.0, 16.0),
+          child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return CreateCamp();
+                }));
+              },
+              child: const Text('Adicionar novo plantio'))),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: ListView(
         shrinkWrap: true,
@@ -77,18 +73,7 @@ class _HomeState extends State<Home> {
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 32.0),
-            child: ListView.separated(
-              itemCount: 25,
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              separatorBuilder: (BuildContext context, int index) =>
-                  const Padding(
-                padding: EdgeInsets.symmetric(vertical: 4.0),
-              ),
-              itemBuilder: (BuildContext context, int index) {
-                return CardItem();
-              },
-            ),
+            child: Plants(),
           ),
         ],
       ),

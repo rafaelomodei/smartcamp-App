@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:smart_camp/components/button/button.dart';
-import 'package:smart_camp/components/containerGlobal/containerGlobal.dart';
-import 'package:smart_camp/components/input/input.dart';
+import 'package:smart_camp/components/atoms/button/button.dart';
+import 'package:smart_camp/components/organism/containerGlobal/containerGlobal.dart';
 
 class LoginToken extends StatefulWidget {
   @override

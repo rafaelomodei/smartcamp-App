@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:smart_camp/components/button/button.dart';
-import 'package:smart_camp/components/cardSelectPlant/cardSelectPlant.dart';
-import 'package:smart_camp/components/containerGlobal/containerGlobal.dart';
+import 'package:smart_camp/components/atoms/button/button.dart';
+import 'package:smart_camp/components/organism/containerGlobal/containerGlobal.dart';
 
 class SelectPlant extends StatefulWidget {
   SelectPlant({Key? key}) : super(key: key);
@@ -27,7 +26,7 @@ class _SelectPlantState extends State<SelectPlant> {
           color: Theme.of(context).colorScheme.background,
         ),
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(32.0, 16.0, 32.0, 16.0),
+          padding: const EdgeInsets.fromLTRB(32.0, 16.0, 32.0, 0),
           child: Button('Cadastrar plantio'),
         ),
       ),
@@ -79,16 +78,18 @@ class _SelectPlantState extends State<SelectPlant> {
                 // shrinkWrap: true,
               ],
             ),
-            GridView.count(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              crossAxisCount: isMobile ? 2 : 3,
-              crossAxisSpacing: 12.0,
-              mainAxisSpacing: 12.0,
-              children: List.generate(20, (index) {
-                return CardSlectPlant();
-              }),
-            ),
+
+            // GridView.count(
+            //   shrinkWrap: true,
+            //   physics: NeverScrollableScrollPhysics(),
+            //   crossAxisCount: isMobile ? 2 : 3,
+            //   crossAxisSpacing: 12.0,
+            //   mainAxisSpacing: 12.0,
+            //   children: List.generate(20, (index) {
+            //     return CardSlectPlant();
+            //   }),
+            // ),
+
             // alignment: Alignment.bottomCenter,
             // Positioned(
             //   bottom: 15.0,
