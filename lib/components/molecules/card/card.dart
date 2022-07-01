@@ -37,9 +37,7 @@ class CardItem extends StatelessWidget {
               // fit: BoxFit.fitWidth,
             ),
           ),
-          Consumer<Plant>(builder: (context, plantName, child) {
-            return Text(plantName.toString());
-          })
+          Text(plant.toString()),
         ],
       ),
     );

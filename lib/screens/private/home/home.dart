@@ -14,14 +14,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final List<Plant> itemList = [
-    Plant('Manga'),
-    Plant('Morango'),
-    Plant('Alface'),
-    Plant('Mandioca'),
-    // ElevatedButton(onPressed: () {}, child: Text('asdas')),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

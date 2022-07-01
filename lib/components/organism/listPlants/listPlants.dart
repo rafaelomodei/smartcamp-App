@@ -11,9 +11,9 @@ class Plants extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ListPlant>(builder: (context, listPlants, child) {
       return ListView.separated(
+        physics: const NeverScrollableScrollPhysics(),
         itemCount: listPlants.listPlant.length,
         shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
         separatorBuilder: (BuildContext context, int index) => const Padding(
           padding: EdgeInsets.symmetric(vertical: 4.0),
         ),

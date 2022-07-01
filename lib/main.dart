@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_camp/model/listPlants.dart';
-import 'package:smart_camp/model/plant.dart';
 import 'package:smart_camp/screens/private/home/home.dart';
 import 'package:smart_camp/theme/themeDefault.dart';
 
 void main() {
   runApp(MultiProvider(
     providers: [
-      ChangeNotifierProvider(
-        create: (context) => Plant('Milho'),
-      ),
       ChangeNotifierProvider(
         create: (context) => ListPlant(),
       )

@@ -91,8 +91,7 @@ class CreateCamp extends StatelessWidget {
     final String name = inputNameCampController.text;
 
     if (_validateInputName(name) != null) {
-      final newPlant =
-          Provider.of<Plant>(context, listen: false).createPlant(name);
+      final Plant newPlant = Plant(name, 'photo', new DateTime(2022));
       _uptdateListPlant(context, newPlant);
       Navigator.pop(context);
     }
