@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:smart_camp/components/atoms/button/button.dart';
+import 'package:smart_camp/components/molecules/cardSelectPlant/cardSelectPlant.dart';
 import 'package:smart_camp/components/organism/containerGlobal/containerGlobal.dart';
+import 'package:smart_camp/components/organism/taggleSelectPlant/taggleSelectPlant.dart';
+import 'package:smart_camp/model/camp.dart';
+import 'package:smart_camp/model/plant.dart';
+import 'package:smart_camp/model/planting.dart';
+import 'package:smart_camp/model/sensors.dart';
 
 class SelectPlant extends StatefulWidget {
-  SelectPlant({Key? key}) : super(key: key);
+  Camp camp;
+
+  SelectPlant({Key? key, required this.camp}) : super(key: key);
 
   @override
   _SelectPlantState createState() => _SelectPlantState();
@@ -19,6 +27,7 @@ class _SelectPlantState extends State<SelectPlant> {
   Widget build(BuildContext context) {
     bool isMobile = MediaQuery.of(context).size.shortestSide < 576;
 
+    print(widget.camp);
     return Scaffold(
       floatingActionButton: Container(
         width: 564,
@@ -79,6 +88,10 @@ class _SelectPlantState extends State<SelectPlant> {
               ],
             ),
 
+            TaggleSlectPlant(),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 30.0),
+            )
             // GridView.count(
             //   shrinkWrap: true,
             //   physics: NeverScrollableScrollPhysics(),
@@ -106,5 +119,14 @@ class _SelectPlantState extends State<SelectPlant> {
 
   String _validateInputPhone({String value = ''}) {
     return value.length != 9 ? 'aasd' : '';
+  }
+
+  _createPlanting(String campName) {
+    Plant plantMilho = Plant('Milho', 'photo', new DateTime(2022));
+    Camp camp = Camp(campName);
+    Sensors sensors = Sensors(false, true, false, 0, 0, 2, 3, 7, 0);
+
+    Planting planting = Planting(plantMilho, sensors);
+    camp.addPlant(planting);
   }
 }

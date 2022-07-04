@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:smart_camp/model/plant.dart';
 import 'package:smart_camp/theme/colorSets.dart';
 
-class CardSlectPlant extends StatelessWidget {
-  String title = 'Maracujá';
-  String image = 'assets/img/png/maracuja.png';
-  bool _selected = false;
+class CardSlectPlant extends StatefulWidget {
+  bool isSelected;
+  Plant plant;
 
-  CardSlectPlant({Key? key}) : super(key: key);
+  CardSlectPlant(
+    this.plant, {
+    Key? key,
+    required this.isSelected,
+  }) : super(key: key);
 
+  @override
+  State<CardSlectPlant> createState() => _CardSlectPlantState();
+}
+
+class _CardSlectPlantState extends State<CardSlectPlant> {
   final LinearGradient isSelectedBackground = LinearGradient(
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
@@ -23,41 +32,40 @@ class CardSlectPlant extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ButtonStyle(
-          padding: MaterialStateProperty.all(EdgeInsets.zero),
-          backgroundColor: MaterialStateProperty.all(Colors.transparent)),
-      child: Ink(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(16)),
-            border: _selected
-                ? Border.all(color: Theme.of(context).primaryColor, width: 4.0)
-                : null,
-            gradient: _selected ? notSelectedBackground : isSelectedBackground),
-        child: Padding(
-          padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: EdgeInsets.fromLTRB(0, 0, 16, 0),
-                child: Image.asset(
-                  image,
-                  alignment: Alignment.center,
-                ),
-              ),
-              Text(
-                title,
-                style: Theme.of(context).textTheme.subtitle2,
-              ),
-            ],
+    handleDecoration() {
+      if (widget.isSelected) {
+        return BoxDecoration(
+          border: Border.all(color: Theme.of(context).colorScheme.primary),
+          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+          color: colorGreenSegundary,
+        );
+      }
+      return BoxDecoration(
+        border: Border.all(color: Colors.transparent),
+      );
+    }
+
+    return Container(
+      decoration: handleDecoration(),
+      padding: EdgeInsets.all(16),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        // mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: EdgeInsets.all(16),
+            child: Image.asset(
+              widget.plant.photo,
+              width: 40,
+              alignment: Alignment.center,
+            ),
           ),
-        ),
+          Text(
+            widget.plant.name,
+            style: Theme.of(context).textTheme.subtitle2,
+          ),
+        ],
       ),
-      onPressed: () {
-        _selected = true;
-      },
     );
   }
 }

@@ -3,8 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_camp/components/atoms/button/button.dart';
 import 'package:smart_camp/components/organism/containerGlobal/containerGlobal.dart';
+import 'package:smart_camp/model/camp.dart';
 import 'package:smart_camp/model/listPlants.dart';
 import 'package:smart_camp/model/plant.dart';
+import 'package:smart_camp/screens/private/selectPlant/selectPlant.dart';
 
 class CreateCamp extends StatelessWidget {
   final inputNameCampController = TextEditingController();
@@ -93,7 +95,13 @@ class CreateCamp extends StatelessWidget {
     if (_validateInputName(name) != null) {
       final Plant newPlant = Plant(name, 'photo', new DateTime(2022));
       _uptdateListPlant(context, newPlant);
-      Navigator.pop(context);
+      // Navigator.pop(context);
+
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => SelectPlant(camp: Camp(name)),
+          ));
     }
   }
 
