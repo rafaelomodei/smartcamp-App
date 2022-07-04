@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:smart_camp/components/atoms/button/button.dart';
 import 'package:smart_camp/components/organism/containerGlobal/containerGlobal.dart';
 import 'package:smart_camp/model/camp.dart';
-import 'package:smart_camp/model/listPlants.dart';
-import 'package:smart_camp/model/plant.dart';
+import 'package:smart_camp/model/listCamp.dart';
 import 'package:smart_camp/screens/private/selectPlant/selectPlant.dart';
 
 class CreateCamp extends StatelessWidget {
@@ -75,7 +73,7 @@ class CreateCamp extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 40),
                         child: ElevatedButton(
-                            onPressed: () => _createPlant(context),
+                            onPressed: () => _createCamp(context),
                             child: const Text('Confirmar')),
                       ),
                     ],
@@ -89,19 +87,20 @@ class CreateCamp extends StatelessWidget {
     );
   }
 
-  _createPlant(context) {
+  _createCamp(context) {
     final String name = inputNameCampController.text;
 
     if (_validateInputName(name) != null) {
-      final Plant newPlant = Plant(name, 'photo', new DateTime(2022));
-      _uptdateListPlant(context, newPlant);
-      // Navigator.pop(context);
+      final Camp newCamp = Camp(name);
+      print('Criando um novo campo --- \n\n');
+      _uptdateListCamp(context, newCamp);
+      Navigator.pop(context);
 
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => SelectPlant(camp: Camp(name)),
-          ));
+      //   Navigator.push(
+      //       context,
+      //       MaterialPageRoute(
+      //         builder: (_) => SelectPlant(camp: Camp(name)),
+      //       ));
     }
   }
 
@@ -109,8 +108,8 @@ class CreateCamp extends StatelessWidget {
     return value != null ? value : null;
   }
 
-  _uptdateListPlant(context, Plant plant) {
-    print(plant);
-    Provider.of<ListPlant>(context, listen: false).addPlant(plant);
+  _uptdateListCamp(context, Camp camp) {
+    print(camp);
+    Provider.of<ListCamp>(context, listen: false).addCamp(camp);
   }
 }

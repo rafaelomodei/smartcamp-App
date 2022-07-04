@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:smart_camp/model/listCamp.dart';
 import 'package:smart_camp/model/listPlants.dart';
 import 'package:smart_camp/screens/private/home/home.dart';
 import 'package:smart_camp/theme/themeDefault.dart';
@@ -9,6 +10,9 @@ void main() {
     providers: [
       ChangeNotifierProvider(
         create: (context) => ListPlant(),
+      ),
+      ChangeNotifierProvider(
+        create: (context) => ListCamp(),
       )
     ],
     child: SmartCamp(),

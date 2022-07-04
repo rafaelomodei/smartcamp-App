@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_camp/components/atoms/button/button.dart';
+import 'package:smart_camp/components/molecules/cardSelectCamp/cardSelectCamp.dart';
 import 'package:smart_camp/components/molecules/cardSelectPlant/cardSelectPlant.dart';
 import 'package:smart_camp/components/organism/containerGlobal/containerGlobal.dart';
+import 'package:smart_camp/components/organism/taggleSelectCamp/taggleSelectCamp.dart';
 import 'package:smart_camp/components/organism/taggleSelectPlant/taggleSelectPlant.dart';
 import 'package:smart_camp/model/camp.dart';
 import 'package:smart_camp/model/listCamp.dart';
@@ -10,28 +12,28 @@ import 'package:smart_camp/model/listPlants.dart';
 import 'package:smart_camp/model/plant.dart';
 import 'package:smart_camp/model/planting.dart';
 import 'package:smart_camp/model/sensors.dart';
+import 'package:smart_camp/screens/private/createCamp/createCamp.dart';
 import 'package:smart_camp/screens/private/home/home.dart';
 
-class SelectPlant extends StatefulWidget {
-  Camp camp;
-
-  SelectPlant({Key? key, required this.camp}) : super(key: key);
+class SelectCamp extends StatefulWidget {
+  SelectCamp({Key? key}) : super(key: key);
 
   @override
-  _SelectPlantState createState() => _SelectPlantState();
+  _SelectCampState createState() => _SelectCampState();
 }
 
-class _SelectPlantState extends State<SelectPlant> {
+class _SelectCampState extends State<SelectCamp> {
   final inputNameCampController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
 
-  String img = 'assets/img/png/emojiHappy.png';
+  List<Camp> listCamp = [
+    Camp('Camp 1'),
+    Camp('Camp 2'),
+    Camp('Camp 3'),
+    Camp('Camp 4'),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    bool isMobile = MediaQuery.of(context).size.shortestSide < 576;
-
-    print(widget.camp);
     return Scaffold(
       floatingActionButton: Container(
         width: 564,
@@ -41,9 +43,9 @@ class _SelectPlantState extends State<SelectPlant> {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(32.0, 16.0, 32.0, 0),
           child: ElevatedButton(
-            child: Text('Cadastrar plantio'),
+            child: Text('Continuar'),
             onPressed: () => {
-              _createPlanting(widget.camp),
+              // _createPlanting(widget.camp),
             },
           ),
         ),
@@ -87,7 +89,7 @@ class _SelectPlantState extends State<SelectPlant> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 0, 0, 24),
                   child: Text(
-                    'Quais plantas você deseja plantar no campo Hortaliças?',
+                    'Em qual campo você deseja plantar ?',
                     textAlign: TextAlign.left,
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
@@ -97,7 +99,38 @@ class _SelectPlantState extends State<SelectPlant> {
               ],
             ),
 
-            TaggleSlectPlant(),
+            ElevatedButton(
+              child: Text('Criar novo campo'),
+              onPressed: () => {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => CreateCamp(),
+                    )),
+              },
+            ),
+
+            Consumer<ListCamp>(builder: (context, listCamps, child) {
+              print(listCamps.listCamp.toString());
+              if (listCamps.listCamp.length > 1)
+                return TaggleSlectCamp(listCamps.listCamp);
+              if (listCamps.listCamp.length == 1)
+                return CardSlectCamp(
+                  listCamps.listCamp[0],
+                  isSelected: true,
+                );
+              return ElevatedButton(
+                child: Text('Criar novo campo'),
+                onPressed: () => {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => CreateCamp(),
+                      )),
+                },
+              );
+            }),
+
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 30.0),
             )

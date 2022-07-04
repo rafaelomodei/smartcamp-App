@@ -5,12 +5,11 @@ import 'package:provider/provider.dart';
 import 'package:smart_camp/model/plant.dart';
 
 class CardItem extends StatelessWidget {
-  String title = 'Maracujá';
   String image = 'assets/img/png/maracuja.png';
 
   final Plant plant;
 
-  CardItem(this.plant);
+  CardItem(this.plant, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +36,7 @@ class CardItem extends StatelessWidget {
               // fit: BoxFit.fitWidth,
             ),
           ),
-          Text(plant.toString()),
+          Text(plant.name),
         ],
       ),
     );

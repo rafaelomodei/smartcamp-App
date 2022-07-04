@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart';
+
 import './planting.dart';
 
-class Camp {
+class Camp extends ChangeNotifier {
   final String _name;
   final List<Planting> _listPlanting = [];
 
@@ -11,5 +13,7 @@ class Camp {
 
   void addPlant(Planting planting) {
     _listPlanting.add(planting);
+
+    notifyListeners();
   }
 }
