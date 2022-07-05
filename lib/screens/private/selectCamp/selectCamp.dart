@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_camp/components/atoms/button/button.dart';
+import 'package:smart_camp/components/molecules/card/card.dart';
 import 'package:smart_camp/components/molecules/cardSelectCamp/cardSelectCamp.dart';
 import 'package:smart_camp/components/molecules/cardSelectPlant/cardSelectPlant.dart';
 import 'package:smart_camp/components/organism/containerGlobal/containerGlobal.dart';
@@ -25,32 +26,43 @@ class SelectCamp extends StatefulWidget {
 class _SelectCampState extends State<SelectCamp> {
   final inputNameCampController = TextEditingController();
 
-  List<Camp> listCamp = [
-    Camp('Camp 1'),
-    Camp('Camp 2'),
-    Camp('Camp 3'),
-    Camp('Camp 4'),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: Container(
-        width: 564,
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.background,
         ),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(32.0, 16.0, 32.0, 0),
+        // child:
+        child: Container(
+          width: double.infinity,
+          height: 56,
           child: ElevatedButton(
-            child: Text('Continuar'),
+            style: ElevatedButton.styleFrom(
+              textStyle: const TextStyle(fontSize: 13.0),
+              padding: const EdgeInsets.all(8.0),
+              elevation: 0.0,
+              primary: Theme.of(context).colorScheme.primary,
+              onPrimary: Theme.of(context).colorScheme.onPrimary,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16.0),
+              ),
+              shadowColor: Colors.transparent,
+            ),
             onPressed: () => {
-              // _createPlanting(widget.camp),
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => CreateCamp(),
+                  )),
             },
+            child: const Text('Criar novo campo'),
           ),
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         leading: IconButton(
@@ -58,79 +70,69 @@ class _SelectCampState extends State<SelectCamp> {
             Icons.arrow_back_ios_new_rounded,
             color: Theme.of(context).colorScheme.secondary,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         elevation: 0.0,
         // backgroundColor: Colors.transparent,
       ),
 
       body: SafeArea(
+        top: true,
+        bottom: true,
         child: CustomScrollView(slivers: [
           SliverList(
             delegate: SliverChildListDelegate(
               <Widget>[
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 40),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'É hora',
-                        textAlign: TextAlign.left,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                      Text(
-                        'de plantar!',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 24),
-                  child: Text(
-                    'Em qual campo você deseja plantar ?',
-                    textAlign: TextAlign.left,
-                    style: Theme.of(context).textTheme.bodyText1,
-                  ),
-                ),
-                ElevatedButton(
-                  child: Text('Criar novo campo'),
-                  onPressed: () => {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => CreateCamp(),
-                      ),
-                    ),
-                  },
-                ),
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 40, 0, 40),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'É hora',
+                                textAlign: TextAlign.left,
+                                style: Theme.of(context).textTheme.headline4,
+                              ),
+                              Text(
+                                'de plantar!',
+                                style: Theme.of(context).textTheme.headline3,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 24),
+                          child: Text(
+                            'Em qual campo você deseja plantar ?',
+                            textAlign: TextAlign.left,
+                            style: Theme.of(context).textTheme.bodyText1,
+                          ),
+                        ),
+                      ],
+                    )),
               ],
             ),
           ),
-
           Consumer<ListCamp>(builder: (context, listCamps, child) {
-            print(listCamps.getListCamp.toString());
-            print('Select camp::child: ${child}');
-
             return SliverList(
               delegate: SliverChildListDelegate(
                 List.generate(
                   listCamps.getListCamp.length,
-                  (index) => CardSlectCamp(
-                    listCamps.getListCamp[index],
-                    isSelected: false,
+                  (index) => Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    child: CardSlectCamp(listCamps.getListCamp[index]),
                   ),
                 ),
               ),
             );
           }),
-          // SliverList(
-          //   delegate: SliverChildBuilderDelegate(
-          //     (context, index) => CustomWidget(index),
-          //     childCount: 10,
-          //   ),
-          // ),
         ]),
       ),
 

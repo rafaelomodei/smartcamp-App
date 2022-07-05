@@ -12,11 +12,6 @@ class Plants extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ListCamp>(
       builder: (context, listCamps, child) {
-        print('Quantidade de itens: ');
-        print(listCamps.getListCamp[0].getListPlanting.length);
-        print('listCamps: ');
-        print(listCamps.getListCamp[0].getListPlanting.toString());
-
         return ListView.separated(
           itemCount: listCamps.getListCamp[0].getListPlanting.length,
           shrinkWrap: true,
@@ -25,10 +20,11 @@ class Plants extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 4.0),
           ),
           itemBuilder: (BuildContext context, int index) {
-            print('Listando os campos');
-            print(listCamps.getListCamp[0]);
             return CardItem(
-                listCamps.getListCamp[0].getListPlanting[index].plant);
+                photo:
+                    listCamps.getListCamp[0].getListPlanting[index].plant.photo,
+                name:
+                    listCamps.getListCamp[0].getListPlanting[index].plant.name);
           },
         );
       },

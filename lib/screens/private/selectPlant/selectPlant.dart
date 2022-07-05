@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_camp/components/atoms/button/button.dart';
+import 'package:smart_camp/components/molecules/card/card.dart';
 import 'package:smart_camp/components/molecules/cardSelectPlant/cardSelectPlant.dart';
 import 'package:smart_camp/components/organism/containerGlobal/containerGlobal.dart';
 import 'package:smart_camp/components/organism/taggleSelectPlant/taggleSelectPlant.dart';
@@ -32,6 +33,9 @@ class _SelectPlantState extends State<SelectPlant> {
     Plant('Maracujá roxo', 'assets/img/png/maracuja.png', new DateTime(2022)),
     Plant('Milho', 'assets/img/png/maracuja.png', new DateTime(2022)),
     Plant('Tomate', 'assets/img/png/maracuja.png', new DateTime(2022)),
+    Plant('Alface', 'assets/img/png/maracuja.png', new DateTime(2022)),
+    Plant('Couve', 'assets/img/png/maracuja.png', new DateTime(2022)),
+    Plant('Beterraba', 'assets/img/png/maracuja.png', new DateTime(2022)),
   ];
 
   @override
@@ -39,22 +43,6 @@ class _SelectPlantState extends State<SelectPlant> {
     bool isMobile = MediaQuery.of(context).size.shortestSide < 576;
 
     return Scaffold(
-      floatingActionButton: Container(
-        width: 564,
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.background,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(32.0, 16.0, 32.0, 0),
-          child: ElevatedButton(
-            child: Text('Cadastrar plantio'),
-            onPressed: () => {
-              _createPlanting(widget.camp, listPlants[0]),
-            },
-          ),
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         leading: IconButton(
@@ -62,86 +50,76 @@ class _SelectPlantState extends State<SelectPlant> {
             Icons.arrow_back_ios_new_rounded,
             color: Theme.of(context).colorScheme.secondary,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         elevation: 0.0,
         // backgroundColor: Colors.transparent,
       ),
-      body: ContainerGLobal(
-        ListView(
-          children: <Widget>[
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 40),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'É hora',
-                        textAlign: TextAlign.left,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                      Text(
-                        'de plantar!',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 24),
-                  child: Text(
-                    'Quais plantas você deseja plantar no campo ${widget.camp.getName}?',
-                    textAlign: TextAlign.left,
-                    style: Theme.of(context).textTheme.bodyText1,
-                  ),
-                ),
+      body: SafeArea(
+        top: true,
+        bottom: true,
+        child: CustomScrollView(
+          slivers: [
+            SliverList(
+              delegate: SliverChildListDelegate(
+                <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 40),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'É hora',
+                                textAlign: TextAlign.left,
+                                style: Theme.of(context).textTheme.headline4,
+                              ),
+                              Text(
+                                'de plantar!',
+                                style: Theme.of(context).textTheme.headline3,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 24),
+                          child: Text(
+                            'Quais plantas você deseja plantar no campo ${widget.camp.getName}?',
+                            textAlign: TextAlign.left,
+                            style: Theme.of(context).textTheme.bodyText1,
+                          ),
+                        ),
 
-                // shrinkWrap: true,
-              ],
-            ),
-
-            ListView.separated(
-              itemCount: listPlants.length,
-              shrinkWrap: true,
-              separatorBuilder: (BuildContext context, int index) =>
-                  const Padding(
-                padding: EdgeInsets.symmetric(vertical: 4.0),
-                child: Text('   '),
+                        // shrinkWrap: true,
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              itemBuilder: (BuildContext context, int index) {
-                return ElevatedButton(
-                  child: Text(listPlants[index].name),
-                  onPressed: () =>
-                      _createPlanting(widget.camp, listPlants[index]),
-                );
-              },
             ),
-
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 30.0),
-            )
-            // GridView.count(
-            //   shrinkWrap: true,
-            //   physics: NeverScrollableScrollPhysics(),
-            //   crossAxisCount: isMobile ? 2 : 3,
-            //   crossAxisSpacing: 12.0,
-            //   mainAxisSpacing: 12.0,
-            //   children: List.generate(20, (index) {
-            //     return CardSlectPlant();
-            //   }),
-            // ),
-
-            // alignment: Alignment.bottomCenter,
-            // Positioned(
-            //   bottom: 15.0,
-            //   child: Padding(
-            //     padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-            //     child: Button('Confirmar'),
-            //   ),
-            // ),
+            SliverList(
+              delegate: SliverChildListDelegate(
+                List.generate(
+                  listPlants.length,
+                  (index) => Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    child: InkWell(
+                      child: CardItem(
+                          name: listPlants[index].name,
+                          photo: listPlants[index].photo),
+                      onTap: () =>
+                          _createPlanting(widget.camp, listPlants[index]),
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

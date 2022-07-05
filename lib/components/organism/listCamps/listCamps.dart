@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_camp/components/molecules/buttomCamp/buttomCamp.dart';
-import 'package:smart_camp/components/molecules/card/card.dart';
 import 'package:smart_camp/model/listCamp.dart';
-import 'package:smart_camp/model/listPlants.dart';
 
 class Camps extends StatelessWidget {
   const Camps({Key? key}) : super(key: key);
