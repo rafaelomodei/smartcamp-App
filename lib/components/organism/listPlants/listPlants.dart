@@ -13,12 +13,12 @@ class Plants extends StatelessWidget {
     return Consumer<ListCamp>(
       builder: (context, listCamps, child) {
         print('Quantidade de itens: ');
-        print(listCamps.listCamp[0].getListPlanting.length);
+        print(listCamps.getListCamp[0].getListPlanting.length);
         print('listCamps: ');
-        print(listCamps.listCamp[0].getListPlanting.toString());
+        print(listCamps.getListCamp[0].getListPlanting.toString());
 
         return ListView.separated(
-          itemCount: listCamps.listCamp[0].getListPlanting.length,
+          itemCount: listCamps.getListCamp[0].getListPlanting.length,
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           separatorBuilder: (BuildContext context, int index) => const Padding(
@@ -26,8 +26,9 @@ class Plants extends StatelessWidget {
           ),
           itemBuilder: (BuildContext context, int index) {
             print('Listando os campos');
-            print(listCamps.listCamp[0]);
-            return CardItem(listCamps.listCamp[0].getListPlanting[index].plant);
+            print(listCamps.getListCamp[0]);
+            return CardItem(
+                listCamps.getListCamp[0].getListPlanting[index].plant);
           },
         );
       },

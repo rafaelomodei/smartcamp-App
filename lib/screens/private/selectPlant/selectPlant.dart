@@ -27,11 +27,17 @@ class _SelectPlantState extends State<SelectPlant> {
 
   String img = 'assets/img/png/emojiHappy.png';
 
+  List<Plant> listPlants = [
+    Plant('Maracujá', 'assets/img/png/maracuja.png', new DateTime(2022)),
+    Plant('Maracujá roxo', 'assets/img/png/maracuja.png', new DateTime(2022)),
+    Plant('Milho', 'assets/img/png/maracuja.png', new DateTime(2022)),
+    Plant('Tomate', 'assets/img/png/maracuja.png', new DateTime(2022)),
+  ];
+
   @override
   Widget build(BuildContext context) {
     bool isMobile = MediaQuery.of(context).size.shortestSide < 576;
 
-    print(widget.camp);
     return Scaffold(
       floatingActionButton: Container(
         width: 564,
@@ -43,7 +49,7 @@ class _SelectPlantState extends State<SelectPlant> {
           child: ElevatedButton(
             child: Text('Cadastrar plantio'),
             onPressed: () => {
-              _createPlanting(widget.camp),
+              _createPlanting(widget.camp, listPlants[0]),
             },
           ),
         ),
@@ -87,7 +93,7 @@ class _SelectPlantState extends State<SelectPlant> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 0, 0, 24),
                   child: Text(
-                    'Quais plantas você deseja plantar no campo Hortaliças?',
+                    'Quais plantas você deseja plantar no campo ${widget.camp.getName}?',
                     textAlign: TextAlign.left,
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
@@ -97,7 +103,23 @@ class _SelectPlantState extends State<SelectPlant> {
               ],
             ),
 
-            TaggleSlectPlant(),
+            ListView.separated(
+              itemCount: listPlants.length,
+              shrinkWrap: true,
+              separatorBuilder: (BuildContext context, int index) =>
+                  const Padding(
+                padding: EdgeInsets.symmetric(vertical: 4.0),
+                child: Text('   '),
+              ),
+              itemBuilder: (BuildContext context, int index) {
+                return ElevatedButton(
+                  child: Text(listPlants[index].name),
+                  onPressed: () =>
+                      _createPlanting(widget.camp, listPlants[index]),
+                );
+              },
+            ),
+
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 30.0),
             )
@@ -130,11 +152,10 @@ class _SelectPlantState extends State<SelectPlant> {
     return value.length != 9 ? 'aasd' : '';
   }
 
-  _createPlanting(Camp camp) {
-    Plant plantMilho = Plant('Milho', 'photo', new DateTime(2022));
+  _createPlanting(Camp camp, Plant plant) {
     Sensors sensors = Sensors(false, true, false, 0, 0, 2, 3, 7, 0);
 
-    Planting planting = Planting(plantMilho, sensors);
+    Planting planting = Planting(plant, sensors);
 
     print(planting);
     camp.addPlant(planting);

@@ -63,12 +63,12 @@ class _SelectCampState extends State<SelectCamp> {
         elevation: 0.0,
         // backgroundColor: Colors.transparent,
       ),
-      body: ContainerGLobal(
-        ListView(
-          children: <Widget>[
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+
+      body: SafeArea(
+        child: CustomScrollView(slivers: [
+          SliverList(
+            delegate: SliverChildListDelegate(
+              <Widget>[
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 0, 0, 40),
                   child: Column(
@@ -94,68 +94,138 @@ class _SelectCampState extends State<SelectCamp> {
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
                 ),
-
-                // shrinkWrap: true,
-              ],
-            ),
-
-            ElevatedButton(
-              child: Text('Criar novo campo'),
-              onPressed: () => {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => CreateCamp(),
-                    )),
-              },
-            ),
-
-            Consumer<ListCamp>(builder: (context, listCamps, child) {
-              print(listCamps.listCamp.toString());
-              if (listCamps.listCamp.length > 1)
-                return TaggleSlectCamp(listCamps.listCamp);
-              if (listCamps.listCamp.length == 1)
-                return CardSlectCamp(
-                  listCamps.listCamp[0],
-                  isSelected: true,
-                );
-              return ElevatedButton(
-                child: Text('Criar novo campo'),
-                onPressed: () => {
-                  Navigator.push(
+                ElevatedButton(
+                  child: Text('Criar novo campo'),
+                  onPressed: () => {
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (_) => CreateCamp(),
-                      )),
-                },
-              );
-            }),
+                      ),
+                    ),
+                  },
+                ),
+              ],
+            ),
+          ),
 
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 30.0),
-            )
-            // GridView.count(
-            //   shrinkWrap: true,
-            //   physics: NeverScrollableScrollPhysics(),
-            //   crossAxisCount: isMobile ? 2 : 3,
-            //   crossAxisSpacing: 12.0,
-            //   mainAxisSpacing: 12.0,
-            //   children: List.generate(20, (index) {
-            //     return CardSlectPlant();
-            //   }),
-            // ),
+          Consumer<ListCamp>(builder: (context, listCamps, child) {
+            print(listCamps.getListCamp.toString());
+            print('Select camp::child: ${child}');
 
-            // alignment: Alignment.bottomCenter,
-            // Positioned(
-            //   bottom: 15.0,
-            //   child: Padding(
-            //     padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-            //     child: Button('Confirmar'),
-            //   ),
-            // ),
-          ],
-        ),
+            return SliverList(
+              delegate: SliverChildListDelegate(
+                List.generate(
+                  listCamps.getListCamp.length,
+                  (index) => CardSlectCamp(
+                    listCamps.getListCamp[index],
+                    isSelected: false,
+                  ),
+                ),
+              ),
+            );
+          }),
+          // SliverList(
+          //   delegate: SliverChildBuilderDelegate(
+          //     (context, index) => CustomWidget(index),
+          //     childCount: 10,
+          //   ),
+          // ),
+        ]),
       ),
+
+      // body: ContainerGLobal(
+      //   ListView(
+      //     children: <Widget>[
+      //       Column(
+      //         crossAxisAlignment: CrossAxisAlignment.start,
+      //         children: [
+      //           Padding(
+      //             padding: const EdgeInsets.fromLTRB(0, 0, 0, 40),
+      //             child: Column(
+      //               crossAxisAlignment: CrossAxisAlignment.start,
+      //               children: [
+      //                 Text(
+      //                   'É hora',
+      //                   textAlign: TextAlign.left,
+      //                   style: Theme.of(context).textTheme.headline4,
+      //                 ),
+      //                 Text(
+      //                   'de plantar!',
+      //                   style: Theme.of(context).textTheme.headline3,
+      //                 ),
+      //               ],
+      //             ),
+      //           ),
+      //           Padding(
+      //             padding: const EdgeInsets.fromLTRB(0, 0, 0, 24),
+      //             child: Text(
+      //               'Em qual campo você deseja plantar ?',
+      //               textAlign: TextAlign.left,
+      //               style: Theme.of(context).textTheme.bodyText1,
+      //             ),
+      //           ),
+
+      //           // shrinkWrap: true,
+      //         ],
+      //       ),
+
+      //       ElevatedButton(
+      //         child: Text('Criar novo campo'),
+      //         onPressed: () => {
+      //           Navigator.push(
+      //               context,
+      //               MaterialPageRoute(
+      //                 builder: (_) => CreateCamp(),
+      //               )),
+      //         },
+      //       ),
+
+      //       Consumer<ListCamp>(builder: (context, listCamps, child) {
+      //         print(listCamps.getListCamp.toString());
+      //         print('Select camp::child: ${child}');
+
+      //         if (listCamps.getListCamp.length == 1) {
+      //           return CardSlectCamp(
+      //             listCamps.getListCamp[0],
+      //             isSelected: true,
+      //           );
+      //         }
+
+      //         if (listCamps.getListCamp.length > 1) {
+      //           print('Entrando dentro do toggle');
+      //           return TaggleSlectCamp(listCamps.getListCamp);
+      //         }
+
+      //         return Container();
+      //       }),
+
+      // Padding(
+      //   padding: const EdgeInsets.symmetric(vertical: 30.0),
+      // )
+      // GridView.count(
+      //   shrinkWrap: true,
+      //   physics: NeverScrollableScrollPhysics(),
+      //   crossAxisCount: isMobile ? 2 : 3,
+      //   crossAxisSpacing: 12.0,
+      //   mainAxisSpacing: 12.0,
+      //   children: List.generate(20, (index) {
+      //     return CardSlectPlant();
+      //   }),
+      // ),
+
+      // alignment: Alignment.bottomCenter,
+      // Positioned(
+      //   bottom: 15.0,
+      //   child: Padding(
+      //     padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+      //     child: Button('Confirmar'),
+      //   ),
+      // ),
+      // ],
+      // ],
+      // ),
+      // ),
     );
   }
 
@@ -179,5 +249,23 @@ class _SelectCampState extends State<SelectCamp> {
         MaterialPageRoute(
           builder: (_) => Home(),
         ));
+  }
+}
+
+class CustomWidget extends StatelessWidget {
+  CustomWidget(this._index) {
+    debugPrint('initialize: $_index');
+  }
+
+  final int _index;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 150,
+      color: (_index % 2 != 0) ? Colors.white : Colors.grey,
+      child:
+          Center(child: Text('index: $_index', style: TextStyle(fontSize: 40))),
+    );
   }
 }

@@ -16,7 +16,7 @@ class Camps extends StatelessWidget {
           width: double.infinity,
           height: 40.0,
           child: ListView.separated(
-            itemCount: listCamps.listCamp.length,
+            itemCount: listCamps.getListCamp.length,
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             separatorBuilder: (BuildContext context, int index) =>
@@ -25,7 +25,7 @@ class Camps extends StatelessWidget {
               child: Text('   '),
             ),
             itemBuilder: (BuildContext context, int index) {
-              return ButtonCamp(listCamps.listCamp[index]);
+              return ButtonCamp(listCamps.getListCamp[index]);
             },
           ),
         );

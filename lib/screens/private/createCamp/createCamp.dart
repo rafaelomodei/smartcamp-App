@@ -92,7 +92,6 @@ class CreateCamp extends StatelessWidget {
 
     if (_validateInputName(name) != null) {
       final Camp newCamp = Camp(name);
-      print('Criando um novo campo --- \n\n');
       _uptdateListCamp(context, newCamp);
       Navigator.pop(context);
 
@@ -109,7 +108,8 @@ class CreateCamp extends StatelessWidget {
   }
 
   _uptdateListCamp(context, Camp camp) {
-    print(camp);
+    print('Criando um novo campo \n\n');
+
     Provider.of<ListCamp>(context, listen: false).addCamp(camp);
   }
 }

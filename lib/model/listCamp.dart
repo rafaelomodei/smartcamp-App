@@ -4,7 +4,7 @@ import 'package:smart_camp/model/camp.dart';
 class ListCamp extends ChangeNotifier {
   final List<Camp> _listCamp = [];
 
-  List<Camp> get listCamp => _listCamp;
+  List<Camp> get getListCamp => _listCamp;
 
   void addCamp(Camp camp) {
     _listCamp.add(camp);
@@ -14,6 +14,6 @@ class ListCamp extends ChangeNotifier {
 
   @override
   String toString() {
-    return listCamp.toString();
+    return getListCamp.toString();
   }
 }

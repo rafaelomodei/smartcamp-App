@@ -22,15 +22,18 @@ class _TaggleSlectCampSate extends State<TaggleSlectCamp> {
 
   List<bool> isSelected = [];
 
-  createList() {
-    for (Camp camp in widget.listCamp) {
+  @override
+  void initState() {
+    super.initState();
+    for (int tamanho = 0; tamanho <= widget.listCamp.length; tamanho++) {
       isSelected.add(false);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    createList();
+    print('ToggleCamp::isSelected: ${isSelected}');
+
     return ToggleButtons(
       direction: Axis.vertical,
       borderColor: Colors.transparent,
@@ -40,15 +43,26 @@ class _TaggleSlectCampSate extends State<TaggleSlectCamp> {
       borderRadius: const BorderRadius.all(Radius.circular(20)),
       highlightColor: Colors.transparent,
       renderBorder: false,
-      children: List<Widget>.generate(
-        widget.listCamp.length,
-        (int index) {
-          return CardSlectCamp(
-            widget.listCamp[index],
-            isSelected: isSelected[index],
-          );
-        },
-      ),
+      children: [
+        SliverList(
+          delegate: SliverChildListDelegate(
+            List.generate(
+              2,
+              (index) => Text('item ${index}`'),
+            ),
+          ),
+        ),
+      ],
+
+      // List<Widget>.generate(
+      //   widget.listCamp.length,
+      //   (int index) {
+      //     return CardSlectCamp(
+      //       widget.listCamp[index],
+      //       isSelected: isSelected[index],
+      //     );
+      //   },
+      // ),
       onPressed: (int index) {
         _handleSelectCamp(index);
       },
@@ -57,6 +71,8 @@ class _TaggleSlectCampSate extends State<TaggleSlectCamp> {
   }
 
   _handleSelectCamp(int index) {
+    print('Tamanho da lista: ${isSelected.length}');
+
     setState(() {
       for (int buttonIndex = 0;
           buttonIndex < isSelected.length;

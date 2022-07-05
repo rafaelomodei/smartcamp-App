@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_camp/model/camp.dart';
+import 'package:smart_camp/screens/private/selectPlant/selectPlant.dart';
 import 'package:smart_camp/theme/colorSets.dart';
 
 class CardSlectCamp extends StatefulWidget {
@@ -32,9 +33,9 @@ class _CardSlectCampState extends State<CardSlectCamp> {
       );
     }
 
-    return Container(
-      decoration: handleDecoration(),
-      padding: EdgeInsets.all(16),
+    return ElevatedButton(
+      // decoration: handleDecoration(),
+      // padding: EdgeInsets.all(16),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         // mainAxisAlignment: MainAxisAlignment.center,
@@ -45,6 +46,18 @@ class _CardSlectCampState extends State<CardSlectCamp> {
           ),
         ],
       ),
+      onPressed: () => {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return SelectPlant(
+                camp: widget.camp,
+              );
+            },
+          ),
+        ),
+      },
     );
   }
 }
